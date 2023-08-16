@@ -1,0 +1,52 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.start-game {
+    width: 150px;
+    height: 50px;
+    background-color: rgba(15, 204, 15, 0.842);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    margin-bottom: 5%;
+    border: solid 3px;
+}
+
+.start-game:hover {
+    transform: scale(0.95);
+}
+
+#clicked {
+    background-color: red;
+    transform: none;
+}
+
+.game-board {
+    display: grid;
+    grid-template: repeat(3, 200px) / repeat(3, 200px);
+}
+
+#slot {
+    font-size: 2rem;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    margin: auto;
+}
+
+.slot2, .slot5, .slot8 {
+    border-left: solid 3px;
+}
+
+.slot3, .slot6, .slot9 {
+    border-left: solid 3px;
+}
+
+.slot2, .slot5, .slot1, .slot4, .slot3, .slot6 {
+    border-bottom: solid 3px black;
+}
