@@ -32,11 +32,13 @@
 }
 
 #slot {
-    font-size: 2rem;
+    font-size: 2.5rem;
     width: 200px;
     height: 200px;
     text-align: center;
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .slot2, .slot5, .slot8 {
@@ -49,4 +51,31 @@
 
 .slot2, .slot5, .slot1, .slot4, .slot3, .slot6 {
     border-bottom: solid 3px black;
+}
+
+.winnerScreen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(27, 32, 102, 0.329);
+    align-items: center;
+    justify-content: center;
+}
+
+.display {
+    display: flex;
+    font-size: 2rem;
+    font-weight: 700;
+}
+.close {
+    width: 150px;
+    height: 50px;
+    background-color: rgb(105, 182, 212);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    border: solid 3px;
 }
