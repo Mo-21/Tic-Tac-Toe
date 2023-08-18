@@ -30,40 +30,52 @@ function _addingChar(content) {
 
 function roundsManager(){
     const slots = document.querySelectorAll(".slot");
-    slots.forEach(slot => {slot.addEventListener('click', (e) => {
+    slots.forEach(slot => {slot.addEventListener('click', () => {
 
+    // To avoid clicking on already clicked slot
     if(slot.hasAttribute("data-attribute")){
         return;
 
     } else if(_length <= 9) {
+        slot.innerText = "X";
+        const content = slot.innerText;
+         _addingChar(content);
+        _length += 1;
+        slot.setAttribute("data-attribute", `${_length}`);
+        if(_length < 8) _computerEntry();
+        return _winnerDetermination();
+}});
+})};
 
-            if(_game[_length - 1] === "X") {
-                slot.innerText = "O";
-                const content = slot.innerText;
-                _addingChar(content);
-                _length += 1;
-                slot.setAttribute("data-attribute", `${_length}`); 
-                _winnerDetermination();
+function _computerEntry() {
+    const slot1 = document.querySelector(".slot1");
+    const slot2 = document.querySelector(".slot2");
+    const slot3 = document.querySelector(".slot3");
+    const slot4 = document.querySelector(".slot4");
+    const slot5 = document.querySelector(".slot5");
+    const slot6 = document.querySelector(".slot6");
+    const slot7 = document.querySelector(".slot7");
+    const slot8 = document.querySelector(".slot8");
+    const slot9 = document.querySelector(".slot9");
 
+    const randomSlot = [slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9];
+    
+    const randomIndex = Math.floor(Math.random() * randomSlot.length);
+    const randomlySelectedSlot = randomSlot[randomIndex];
 
-            } else if(_game[_length - 1] === "O") {
-                slot.innerText = "X";
-                const content = slot.innerText;
-                 _addingChar(content);
-                _length += 1;
-                slot.setAttribute("data-attribute", `${_length}`);
-                _winnerDetermination(); 
+    if(randomlySelectedSlot.hasAttribute("data-attribute")){
+        return _computerEntry()
 
-            } else {
-                slot.innerText = "X";
-                const content = slot.innerText;
-                _addingChar(content);
-                _length += 1;
-                slot.setAttribute("data-attribute", `${_length}`); 
-            }
-        }
-}); 
-});
+    } else if(_length < 8) {
+        randomlySelectedSlot.innerText = "O";
+        const content = randomlySelectedSlot.innerText;
+        _addingChar(content);
+        _length += 1;
+        randomlySelectedSlot.setAttribute("data-attribute", `${_length}`);
+        
+    } else if(_length === 8) {
+        return roundsManager();
+    };
 };
 
 function _winnerDetermination() {
@@ -182,7 +194,6 @@ function _winnerDetermination() {
         closeButton.addEventListener('click', () => location.reload());
     }
 }
-
 
 return {
     roundsManager: roundsManager
