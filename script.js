@@ -1,18 +1,24 @@
-// To make the "Start Game" button only clickable for one time
+// To make the buttons only clickable for one time
 let clicked = false;
+let twoPlayersButtonClicked = false;
+let computerButtonClicked = false;
 
 document.addEventListener('DOMContentLoaded', () => {
-    const button = document.querySelector(".start-game");
-    button.addEventListener('click', () => {
-        if(!clicked) {
-            const human = new Players("Human", "X");
-            const computer = new Players("AI", "O");
-            playersInfo.push(human, computer);
-            gameBoard.roundsManager();
-            clicked = true;
-        }
-        button.id = "clicked";
-    });
+const twoPlayersButton = document.querySelector(".two-players");
+const computerButton = document.querySelector(".computer");
+const button = document.querySelector(".start-game");
+
+twoPlayersButton.addEventListener('click', () => {
+    twoPlayersButtonClicked = true;
+    button.style.display = 'block';
+    return gameBoard.startGame();
+});
+
+computerButton.addEventListener('click', () => {
+    computerButtonClicked = true;
+    button.style.display = 'block';
+    return gameBoard.startGame();
+});
 });
 
 //Game Board Module
@@ -22,13 +28,72 @@ const gameBoard = (function() {
 const _game = [];
 let _length = _game.length;
 
-
 function _addingChar(content) { 
     _game.push(content);    
 };
 
+function startGame() {
+    const button = document.querySelector(".start-game");
+    button.addEventListener('click', () => {
+        if(!clicked) {
+            const human = new Players("Human", "X");
+            const computer = new Players("AI", "O");
+            playersInfo.push(human, computer);
+            if(computerButtonClicked === true) {
+                computerRoundsManager();
+                clicked = true;
+                return;
+            }
+            if(twoPlayersButtonClicked === true) {
+                twoPlayersRoundsManager();
+                clicked = true;
+                return;
+            }
+        }
+        button.id = "clicked";
+    });
+}
 
-function roundsManager(){
+function twoPlayersRoundsManager() {
+    const slots = document.querySelectorAll(".slot");
+    slots.forEach(slot => {slot.addEventListener('click', () => {
+
+    // To avoid clicking on already clicked slot
+    if(slot.hasAttribute("data-attribute")){
+        return;
+
+    } else if(_length <= 9) {
+
+        if(_game[_length - 1] === "X") {
+            slot.innerText = "O";
+            const content = slot.innerText;
+            _addingChar(content);
+            _length += 1;
+            slot.setAttribute("data-attribute", `${_length}`); 
+            _winnerDetermination();
+
+
+        } else if(_game[_length - 1] === "O") {
+            slot.innerText = "X";
+            const content = slot.innerText;
+             _addingChar(content);
+            _length += 1;
+            slot.setAttribute("data-attribute", `${_length}`);
+            _winnerDetermination(); 
+
+        } else {
+            slot.innerText = "X";
+            const content = slot.innerText;
+            _addingChar(content);
+            _length += 1;
+            slot.setAttribute("data-attribute", `${_length}`); 
+        }
+    }
+}); 
+});
+};
+
+function computerRoundsManager(){
     const slots = document.querySelectorAll(".slot");
     slots.forEach(slot => {slot.addEventListener('click', () => {
 
@@ -45,7 +110,8 @@ function roundsManager(){
         if(_length < 8) _computerEntry();
         return _winnerDetermination();
 }});
-})};
+});
+};
 
 function _computerEntry() {
     const slot1 = document.querySelector(".slot1");
@@ -74,7 +140,7 @@ function _computerEntry() {
         randomlySelectedSlot.setAttribute("data-attribute", `${_length}`);
         
     } else if(_length === 8) {
-        return roundsManager();
+        return computerRoundsManager();
     };
 };
 
@@ -196,7 +262,9 @@ function _winnerDetermination() {
 }
 
 return {
-    roundsManager: roundsManager
+    computerRoundsManager: computerRoundsManager,
+    twoPlayersRoundsManager: twoPlayersRoundsManager,
+    startGame: startGame
 };
 
 })();

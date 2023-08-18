@@ -4,13 +4,14 @@ html {
 
 .main {
     display: grid;
-    grid-template: 150px 1fr / 1fr;
+    grid-template: 100px 1fr / 1fr;
     margin: 0 auto;
     justify-items: center;
     align-items: center;
 }
 
 .start-game {
+    display: none;
     width: min(200px, 70%);
     height: max(70px, 40%);
     background-color: rgba(128, 128, 128, 0.678);
@@ -20,13 +21,34 @@ html {
     border: solid 3px;
 }
 
-.start-game:hover {
+button:hover {
     transform: scale(0.95);
 }
 
 #clicked {
     background-color: red;
     transform: none;
+}
+
+.choose-button {
+    display: flex;
+    max-height: 50px;
+}
+
+.two-players {
+    width: min(120px, 70%);
+    height: max(40px, 20%);
+    background-color: rgba(128, 128, 128, 0.678);
+    font-weight: 700;
+    border: solid 3px;
+}
+
+.computer {
+    width: min(100px, 70%);
+    height: max(40px, 20%);
+    background-color: rgba(128, 128, 128, 0.678);
+    font-weight: 700;
+    border: solid 3px;
 }
 
 .game-board {
