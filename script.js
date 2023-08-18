@@ -1,4 +1,4 @@
-let slotsValue = "";
+// To make the "Start Game" button only clickable for one time
 let clicked = false;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -35,49 +35,36 @@ function roundsManager(){
     if(slot.hasAttribute("data-attribute")){
         return;
 
-    } else if(_length < 9) {
+    } else if(_length <= 9) {
 
             if(_game[_length - 1] === "X") {
                 slot.innerText = "O";
                 const content = slot.innerText;
+                _addingChar(content);
                 _length += 1;
-                if(_length === 9) return _tie();
+                slot.setAttribute("data-attribute", `${_length}`); 
                 _winnerDetermination();
-                slot.setAttribute("data-attribute", `${_length}`);
-                return _addingChar(content);
+
 
             } else if(_game[_length - 1] === "O") {
                 slot.innerText = "X";
                 const content = slot.innerText;
+                 _addingChar(content);
                 _length += 1;
                 slot.setAttribute("data-attribute", `${_length}`);
-                if(_length === 9) return _tie(); 
-                _winnerDetermination();
-                return _addingChar(content);
+                _winnerDetermination(); 
 
             } else {
                 slot.innerText = "X";
                 const content = slot.innerText;
+                _addingChar(content);
                 _length += 1;
-                slot.setAttribute("data-attribute", `${_length}`);
-                return _addingChar(content);
+                slot.setAttribute("data-attribute", `${_length}`); 
             }
         }
 }); 
 });
-
 };
-
-function _tie() {
-    const winnerScreen = document.querySelector(".winnerScreen");
-    const display = document.querySelector(".display");
-    const closeButton = document.querySelector(".close");
-
-    winnerScreen.style.display = 'flex';
-    display.textContent = "TIE! G#$ DAMN >> "
-    closeButton.addEventListener('click', () => location.reload());
-}
-
 
 function _winnerDetermination() {
     const slot1 = document.querySelector(".slot1");
@@ -189,8 +176,10 @@ function _winnerDetermination() {
             closeButton.addEventListener('click', () => location.reload());
         };
 
-    } else {
-        return;
+    } else if(_length === 9) {
+        winnerScreen.style.display = 'flex';
+        display.textContent = "TIE! G#$ DAMN >> "
+        closeButton.addEventListener('click', () => location.reload());
     }
 }
 
