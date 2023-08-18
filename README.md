@@ -1,11 +1,14 @@
 # Tic-Tac-Toe
-This is a simple web-based Tic Tac Toe game implemented using HTML, CSS, and JavaScript. The game allows a player vs computer to take turns and compete against each other to get three of their symbols (X or O) in a row, column, or diagonal. It was made as a part of The Odin Project curriculum, and was meant to apply the factory functions and module pattern principles in JavaScript.
+This is a simple web-based Tic Tac Toe game implemented using HTML, CSS, and JavaScript. The game allows a player vs computer and two players to take turns and compete against each other to get three of their symbols (X or O) in a row, column, or diagonal. It was made as a part of The Odin Project curriculum, and was meant to apply the factory functions and module pattern principles in JavaScript.
 
 ## Features
 
 - One player gameplay: Play against a the computer that randomly generates its moves.
+- Two-player gameplay: Play against a friend locally.
 - Interactive board: Click on cells to make your moves.
 - Win detection: The game detects and announces the winner.
+- Reset functionality: Start a new game anytime.
+
 
 ## Technologies Used
 
