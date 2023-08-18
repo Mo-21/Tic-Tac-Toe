@@ -3,21 +3,20 @@ html {
 }
 
 .main {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template: 150px 1fr / 1fr;
+    margin: 0 auto;
+    justify-items: center;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
 }
 
 .start-game {
-    width: 250px;
-    height: 80px;
+    width: min(200px, 70%);
+    height: max(70px, 40%);
     background-color: rgba(128, 128, 128, 0.678);
     font-weight: 700;
     font-size: 1.7rem;
     letter-spacing: 2px;
-    margin-bottom: 5%;
     border: solid 3px;
 }
 
@@ -33,9 +32,9 @@ html {
 .game-board {
     display: grid;
     grid-template: repeat(3, 200px) / repeat(3, 200px);
-    background-color: #FEE715;
     opacity: 0.8;
     border-radius: 25px;
+    background-color: #FEE715;
 }
 
 #slot {
